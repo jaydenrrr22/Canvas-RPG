@@ -21,7 +21,7 @@ export class GameLoop {
     this.accumulatedTime += deltaTime;
 
     // Fixed time step updates
-    // If there is enought accumulated time to run one or more fixedd update, run them
+    // If there is enough accumulated time to run one or more fixedd update, run them
     while (this.accumulatedTime >= this.timeStep) {
       this.update(this.timeStep); // Here, we pass the fixed time step size.
       this.accumulatedTime -= this.timeStep;
