@@ -33,4 +33,35 @@ export class Sprite {
       }
     }
   }
+
+  drawImage(ctx, x, y) {
+    if (!this.resource.isLoaded) {
+      return;
+    }
+
+    // Find the correct sprite sheet frame to use
+    let frameCoordX = 0;
+    let frameCoordY = 0;
+
+    const frame = this.frameMap.get(this.frame);
+    if (frame) {
+      frameCoordX = frame.x;
+      frameCoordY = frame.y;
+    }
+
+    const frameSizeX = this.frameSize.x;
+    const frameSizeY = this.frameSize.y;
+
+    ctx.drawImage(
+      this.resource.image,
+      frameCoordX,
+      frameCoordY, // Top Y corner of frame
+      frameSizeX, // How much to crop from the sprite sheet (X)
+      frameSizeY, // How much to crop from the sprite sheet (Y)
+      x, // Where to place this on canvas tag X (0)
+      y, // Where to place this on canvas tag X (0)
+      frameSizeX * this.scale, // How large to scale it (X)
+      frameSizeY * this.scale // How large to scale it (X)
+    );
+  }
 }
