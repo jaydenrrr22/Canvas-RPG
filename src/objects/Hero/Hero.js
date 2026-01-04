@@ -19,6 +19,7 @@ import {
   STANDING_UP,
 } from "./heroAnimations";
 import { moveTowards } from "../../helpers/moveTowards";
+import { events } from "../../Events";
 
 export class Hero extends GameObject {
   constructor(x, y) {
@@ -63,6 +64,17 @@ export class Hero extends GameObject {
     if (hasArrived) {
       this.tryMove(root);
     }
+
+    this.tryEmitPosition();
+  }
+
+  tryEmitPosition() {
+    if (this.lastX === this.position.x && this.lastY === this.position.y) {
+      return;
+    }
+    this.lastX = this.position.x;
+    this.lastY = this.position.y;
+    events.emit("HERO_POSITION", this.position);
   }
 
   tryMove(root) {

@@ -1,4 +1,5 @@
 import { Animations } from "./src/Animations";
+import { events } from "./src/Events";
 import { FrameIndexPattern } from "./src/FrameIndexPattern";
 import { GameLoop } from "./src/GameLoop";
 import { GameObject } from "./src/GameObject";
@@ -51,6 +52,10 @@ mainScene.addChild(hero);
 
 // Add an Input class to the main scene
 mainScene.input = new Input();
+
+events.on("HERO_POSITION", mainScene, (heroPosition) => {
+  console.log("HERO MOVED!", heroPosition);
+});
 
 // Establish update and draw loops
 const update = (delta) => {
